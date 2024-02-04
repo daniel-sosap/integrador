@@ -5,32 +5,32 @@
 Este archivo ha sido generado por Eclipse Implementation of JAXB v4.0.2 
 Visite https://eclipse-ee4j.github.io/jaxb-ri 
 Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-Generado el: 2024.02.03 a las 10:41:17 PM CST
+Generado el: 2024.02.04 a las 10:59:33 AM CST
   -->
-  <bindings scd="x-schema::tns" xmlns:tns="http://www.example.com/demosoap/gen">
+  <bindings scd="x-schema::tns" xmlns:tns="http://integracion.com/sdp/gen">
     <schemaBindings map="false">
-      <package name="com.example.demosoap.gen"/>
+      <package name="com.integracion.sdp.gen"/>
     </schemaBindings>
-    <bindings scd="tns:getProductsRequest">
-      <class ref="com.example.demosoap.gen.GetProductsRequest"/>
+    <bindings scd="tns:getIncidentsRequest">
+      <class ref="com.integracion.sdp.gen.GetIncidentsRequest"/>
     </bindings>
-    <bindings scd="tns:getProductsResponse">
-      <class ref="com.example.demosoap.gen.GetProductsResponse"/>
+    <bindings scd="tns:getIncidentsResponse">
+      <class ref="com.integracion.sdp.gen.GetIncidentsResponse"/>
     </bindings>
-    <bindings scd="~tns:product">
-      <class ref="com.example.demosoap.gen.Product"/>
+    <bindings scd="~tns:Incident">
+      <class ref="com.integracion.sdp.gen.Incident"/>
     </bindings>
-    <bindings scd="tns:getProductRequest">
-      <class ref="com.example.demosoap.gen.GetProductRequest"/>
+    <bindings scd="tns:getIncidentRequest">
+      <class ref="com.integracion.sdp.gen.GetIncidentRequest"/>
     </bindings>
-    <bindings scd="tns:getProductResponse">
-      <class ref="com.example.demosoap.gen.GetProductResponse"/>
+    <bindings scd="tns:getIncidentResponse">
+      <class ref="com.integracion.sdp.gen.GetIncidentResponse"/>
     </bindings>
-    <bindings scd="tns:postProductRequest">
-      <class ref="com.example.demosoap.gen.PostProductRequest"/>
+    <bindings scd="tns:postIncidentRequest">
+      <class ref="com.integracion.sdp.gen.PostIncidentRequest"/>
     </bindings>
-    <bindings scd="tns:postProductResponse">
-      <class ref="com.example.demosoap.gen.PostProductResponse"/>
+    <bindings scd="tns:postIncidentResponse">
+      <class ref="com.integracion.sdp.gen.PostIncidentResponse"/>
     </bindings>
   </bindings>
 </bindings>

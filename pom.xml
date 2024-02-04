@@ -8,12 +8,12 @@
         <version>3.0.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
-    <artifactId>demosoap</artifactId>
+    <groupId>com.integracion</groupId>
+    <artifactId>sdp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>demosoap</name>
-    <description>Demo Soap Service project for Spring Boot</description>
+    <name>sdp</name>
+    <description>SDP Soap Service project for Spring Boot</description>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -92,9 +92,9 @@
                 </executions>
                 <configuration>
                     <sources>
-                        <source>src/main/resources/xsd/products.xsd</source>
+                        <source>src/main/resources/xsd/incidents.xsd</source>
                     </sources>
-                    <packageName>com.example.demosoap.gen</packageName>
+                    <packageName>com.integracion.sdp.gen</packageName>
                 </configuration>
                 <dependencies>
                     <dependency>
