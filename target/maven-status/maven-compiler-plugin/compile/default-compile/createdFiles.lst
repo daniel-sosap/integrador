@@ -1,0 +1,16 @@
+com/example/demosoap/gen/package-info.class
+com/example/demosoap/gen/GetProductResponse.class
+com/example/demosoap/gen/ObjectFactory.class
+com/example/demosoap/gen/GetProductsRequest.class
+com/example/demosoap/gen/GetProductsResponse.class
+com/example/demosoap/gen/PostProductRequest.class
+com/example/demosoap/config/WebServiceConfig.class
+com/example/demosoap/gen/GetProductRequest.class
+com/example/demosoap/gen/Product.class
+com/example/demosoap/endpoint/ProductEndpoint.class
+com/example/demosoap/converter/ProductConverter.class
+com/example/demosoap/DemoSoapApplication.class
+com/example/demosoap/model/ProductModel.class
+com/example/demosoap/repository/ProductRepository.class
+com/example/demosoap/ServletInitializer.class
+com/example/demosoap/gen/PostProductResponse.class
