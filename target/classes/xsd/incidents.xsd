@@ -17,7 +17,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- Find by name -->
     <xs:element name="getIncidentRequest">
         <xs:complexType>
             <xs:sequence>
