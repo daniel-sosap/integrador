@@ -5,6 +5,7 @@ import com.integracion.sdp.model.IncidentModel;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Component
@@ -12,19 +13,21 @@ public class IncidentConverter {
 
     public IncidentModel convertIncidentToIncidentModel(Incident incident) {
         IncidentModel incidentModel = new IncidentModel();
-        incidentModel.setId(incident.getId());
-        incidentModel.setName(incident.getName());
-        incidentModel.setPrice(incident.getPrice());
-        incidentModel.setDescription(incident.getDescription());
+        incidentModel.setIdsdp(incident.getIdsdp());
+        incidentModel.setId_cliente(incident.getIdCliente());
+        incidentModel.setDescripcion(incident.getDescripcion());
+        incidentModel.setId_categorizacion(incident.getIdCategorizacion());
+        //incidentModel.setArchivo1(Base64.getDecoder().decode(incident.getArchivo1()));
         return incidentModel;
     }
 
     public Incident convertIncidentModelToIncident(IncidentModel incidentModel) {
         Incident incident = new Incident();
-        incident.setId(incidentModel.getId());
-        incident.setName(incidentModel.getName());
-        incident.setPrice(incidentModel.getPrice());
-        incident.setDescription(incidentModel.getDescription());
+        incident.setIdsdp(incidentModel.getIdsdp());
+        incident.setIdCliente(incidentModel.getId_cliente());
+        incident.setDescripcion(incidentModel.getDescripcion());
+        incident.setIdCategorizacion(incidentModel.getId_categorizacion());
+        //incident.setArchivo1(Base64.getEncoder().encodeToString(incidentModel.getArchivo1()).getBytes());
         return incident;
     }
 

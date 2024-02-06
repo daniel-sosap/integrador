@@ -12,7 +12,9 @@ public class IncidentModel {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
-    private String name;
-    private double price;
-    private String description;
+    private String idsdp;
+    private String id_cliente;
+    private String descripcion;
+    private String id_categorizacion;
+    //private byte[] archivo1;
 }

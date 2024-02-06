@@ -3,6 +3,7 @@ com/integracion/sdp/repository/IncidentRepository.class
 com/integracion/sdp/ServletInitializer.class
 com/integracion/sdp/config/WebServiceConfig.class
 com/integracion/sdp/gen/package-info.class
+com/integracion/sdp/controller/ConsumeSDP.class
 com/integracion/sdp/model/IncidentModel.class
 com/integracion/sdp/converter/IncidentConverter.class
 com/integracion/sdp/gen/PostIncidentResponse.class

@@ -23,10 +23,10 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         <element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         <element name="price" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         <element name="description" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="idsdp" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="id_cliente" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="descripcion" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="id_categorizacion" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>
@@ -37,98 +37,116 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Incident", propOrder = {
-    "id",
-    "name",
-    "price",
-    "description"
+    "idsdp",
+    "idCliente",
+    "descripcion",
+    "idCategorizacion"
 })
 public class Incident {
 
-    protected int id;
     @XmlElement(required = true)
-    protected String name;
-    protected double price;
+    protected String idsdp;
+    @XmlElement(name = "id_cliente", required = true)
+    protected String idCliente;
     @XmlElement(required = true)
-    protected String description;
+    protected String descripcion;
+    @XmlElement(name = "id_categorizacion", required = true)
+    protected String idCategorizacion;
 
     /**
-     * Obtiene el valor de la propiedad id.
-     * 
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Define el valor de la propiedad id.
-     * 
-     */
-    public void setId(int value) {
-        this.id = value;
-    }
-
-    /**
-     * Obtiene el valor de la propiedad name.
+     * Obtiene el valor de la propiedad idsdp.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getName() {
-        return name;
+    public String getIdsdp() {
+        return idsdp;
     }
 
     /**
-     * Define el valor de la propiedad name.
+     * Define el valor de la propiedad idsdp.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setName(String value) {
-        this.name = value;
+    public void setIdsdp(String value) {
+        this.idsdp = value;
     }
 
     /**
-     * Obtiene el valor de la propiedad price.
-     * 
-     */
-    public double getPrice() {
-        return price;
-    }
-
-    /**
-     * Define el valor de la propiedad price.
-     * 
-     */
-    public void setPrice(double value) {
-        this.price = value;
-    }
-
-    /**
-     * Obtiene el valor de la propiedad description.
+     * Obtiene el valor de la propiedad idCliente.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getDescription() {
-        return description;
+    public String getIdCliente() {
+        return idCliente;
     }
 
     /**
-     * Define el valor de la propiedad description.
+     * Define el valor de la propiedad idCliente.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setDescription(String value) {
-        this.description = value;
+    public void setIdCliente(String value) {
+        this.idCliente = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad descripcion.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * Define el valor de la propiedad descripcion.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDescripcion(String value) {
+        this.descripcion = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad idCategorizacion.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIdCategorizacion() {
+        return idCategorizacion;
+    }
+
+    /**
+     * Define el valor de la propiedad idCategorizacion.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIdCategorizacion(String value) {
+        this.idCategorizacion = value;
     }
 
 }

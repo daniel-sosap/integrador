@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IncidentRepository extends JpaRepository<IncidentModel, Integer> {
-    IncidentModel findByName(String name);
+    IncidentModel findByIdsdp(String idsdp);
 }

@@ -1,5 +1,6 @@
 package com.integracion.sdp.endpoint;
 
+import com.integracion.sdp.controller.ConsumeSDP;
 import com.integracion.sdp.converter.IncidentConverter;
 import com.integracion.sdp.gen.*;
 import com.integracion.sdp.model.IncidentModel;
@@ -23,11 +24,14 @@ public class IncidentEndpoint {
     @Autowired
     private IncidentConverter incidentConverter;
 
+    @Autowired
+    private ConsumeSDP consumeSDP;
+
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getIncidentRequest")
     @ResponsePayload
     public GetIncidentResponse getIncident(@RequestPayload GetIncidentRequest request) {
         GetIncidentResponse response = new GetIncidentResponse();
-        IncidentModel incidentModel = incidentRepository.findByName(request.getName());
+        IncidentModel incidentModel = incidentRepository.findByIdsdp(request.getName());
         response.setIncident(incidentConverter.convertIncidentModelToIncident(incidentModel));
         return response;
     }
@@ -46,8 +50,17 @@ public class IncidentEndpoint {
     @ResponsePayload
     public PostIncidentResponse postIncidents(@RequestPayload PostIncidentRequest request) {
         PostIncidentResponse response = new PostIncidentResponse();
+        // Obtener el objeto Incident de la solicitud
+        Incident incidentFromRequest = request.getIncident();
+        // Obtener el valor del campo descripcion
+        String descripcion = incidentFromRequest.getDescripcion();
+        System.out.println("Valor de Descripcion: " + descripcion);
+        String incidenteServiceDeskplus = consumeSDP.sendRequest(descripcion);
         IncidentModel incidentModel = incidentConverter.convertIncidentToIncidentModel(request.getIncident());
         Incident incident = incidentConverter.convertIncidentModelToIncident(incidentRepository.save(incidentModel));
+        incident.setIdsdp(incidenteServiceDeskplus);
+        System.out.println("incidenteServiceDeskplus = " + incidenteServiceDeskplus);
+        System.out.println("Ejecucion de metodo PostIncidentResponse");
         response.setIncident(incident);
         return response;
     }
