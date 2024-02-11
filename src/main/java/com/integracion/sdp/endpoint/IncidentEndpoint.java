@@ -5,12 +5,17 @@ import com.integracion.sdp.converter.IncidentConverter;
 import com.integracion.sdp.gen.*;
 import com.integracion.sdp.model.IncidentModel;
 import com.integracion.sdp.repository.IncidentRepository;
+import com.integracion.sdp.utils.ConsumeSDPAdjunto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
+import java.util.Base64;
 import java.util.List;
 
 @Endpoint
@@ -26,6 +31,9 @@ public class IncidentEndpoint {
 
     @Autowired
     private ConsumeSDP consumeSDP;
+
+    @Autowired
+    private ConsumeSDPAdjunto consumeSDPAdjunto;
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getIncidentRequest")
     @ResponsePayload
@@ -50,12 +58,41 @@ public class IncidentEndpoint {
     @ResponsePayload
     public PostIncidentResponse postIncidents(@RequestPayload PostIncidentRequest request) {
         PostIncidentResponse response = new PostIncidentResponse();
-        // Obtener el objeto Incident de la solicitud
+
         Incident incidentFromRequest = request.getIncident();
-        // Obtener el valor del campo descripcion
+
+        //Llamada a Service Desk plus para crear ticket
         String descripcion = incidentFromRequest.getDescripcion();
         System.out.println("Valor de Descripcion: " + descripcion);
         String incidenteServiceDeskplus = consumeSDP.sendRequest(descripcion);
+
+        //Llamada a service desk plus para agregar adjunto
+
+        // Obtener el nombre y los datos del archivo adjunto desde la solicitud
+        String adjuntoNombre = incidentFromRequest.getAdjuntoNombre();
+        byte[] adjuntoData = incidentFromRequest.getAdjuntoData();
+        String rutaArchivo = null;
+        System.out.println("Nombre del archivo adjunto " + adjuntoNombre);
+        // Guardar el archivo adjunto en la carpeta temporal
+        if (adjuntoData != null && adjuntoNombre != null) {
+            try {
+                 rutaArchivo = System.getProperty("java.io.tmpdir") + File.separator + adjuntoNombre;
+                FileOutputStream fos = new FileOutputStream(rutaArchivo);
+                fos.write(adjuntoData);
+                fos.close();
+                System.out.println("Archivo guardado en la carpeta temporal: " + rutaArchivo);
+            } catch (IOException e) {
+                System.err.println("Error al guardar el archivo en la carpeta temporal: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+
+        // Llamar al método subirArchivo de ConsumeSDPAdjunto para manejar el archivo adjunto
+        if (adjuntoData != null && adjuntoNombre != null) {
+            System.out.println("Entro al if para mandar el archivo");
+            consumeSDPAdjunto.subirArchivo(rutaArchivo, adjuntoNombre, incidenteServiceDeskplus);
+        }
+
         IncidentModel incidentModel = incidentConverter.convertIncidentToIncidentModel(request.getIncident());
         Incident incident = incidentConverter.convertIncidentModelToIncident(incidentRepository.save(incidentModel));
         incident.setIdsdp(incidenteServiceDeskplus);

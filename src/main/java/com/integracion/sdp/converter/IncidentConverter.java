@@ -17,7 +17,9 @@ public class IncidentConverter {
         incidentModel.setId_cliente(incident.getIdCliente());
         incidentModel.setDescripcion(incident.getDescripcion());
         incidentModel.setId_categorizacion(incident.getIdCategorizacion());
-        //incidentModel.setArchivo1(Base64.getDecoder().decode(incident.getArchivo1()));
+//        if (incident.getArchivoAdjunto() != null) {
+//            incidentModel.setArchivoAdjunto(Base64.getDecoder().decode(incident.getArchivoAdjunto()));
+//        }
         return incidentModel;
     }
 
@@ -27,7 +29,10 @@ public class IncidentConverter {
         incident.setIdCliente(incidentModel.getId_cliente());
         incident.setDescripcion(incidentModel.getDescripcion());
         incident.setIdCategorizacion(incidentModel.getId_categorizacion());
-        //incident.setArchivo1(Base64.getEncoder().encodeToString(incidentModel.getArchivo1()).getBytes());
+        // Codifica el campo archivoAdjunto a Base64
+//        if (incidentModel.getArchivoAdjunto() != null) {
+//            incident.setArchivoAdjunto(Base64.getEncoder().encode(incidentModel.getArchivoAdjunto()));
+//        }
         return incident;
     }
 

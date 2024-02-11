@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Entity
 @Data
@@ -16,5 +19,15 @@ public class IncidentModel {
     private String id_cliente;
     private String descripcion;
     private String id_categorizacion;
-    //private byte[] archivo1;
+    private byte[] archivoAdjunto;
+    private String nombreadjunto;
+    // Métodos para convertir de MultipartFile a byte[] y viceversa
+    public void setArchivoAdjunto(MultipartFile archivo) {
+        try {
+            this.archivoAdjunto = archivo.getBytes();
+        } catch (IOException e) {
+            // Manejar la excepción apropiadamente
+        }
+    }
+
 }

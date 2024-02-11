@@ -27,6 +27,8 @@ import jakarta.xml.bind.annotation.XmlType;
  *         <element name="id_cliente" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         <element name="descripcion" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         <element name="id_categorizacion" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="adjunto_nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         <element name="adjunto_data" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>
@@ -40,7 +42,9 @@ import jakarta.xml.bind.annotation.XmlType;
     "idsdp",
     "idCliente",
     "descripcion",
-    "idCategorizacion"
+    "idCategorizacion",
+    "adjuntoNombre",
+    "adjuntoData"
 })
 public class Incident {
 
@@ -52,6 +56,10 @@ public class Incident {
     protected String descripcion;
     @XmlElement(name = "id_categorizacion", required = true)
     protected String idCategorizacion;
+    @XmlElement(name = "adjunto_nombre")
+    protected String adjuntoNombre;
+    @XmlElement(name = "adjunto_data")
+    protected byte[] adjuntoData;
 
     /**
      * Obtiene el valor de la propiedad idsdp.
@@ -147,6 +155,52 @@ public class Incident {
      */
     public void setIdCategorizacion(String value) {
         this.idCategorizacion = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad adjuntoNombre.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getAdjuntoNombre() {
+        return adjuntoNombre;
+    }
+
+    /**
+     * Define el valor de la propiedad adjuntoNombre.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setAdjuntoNombre(String value) {
+        this.adjuntoNombre = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad adjuntoData.
+     * 
+     * @return
+     *     possible object is
+     *     byte[]
+     */
+    public byte[] getAdjuntoData() {
+        return adjuntoData;
+    }
+
+    /**
+     * Define el valor de la propiedad adjuntoData.
+     * 
+     * @param value
+     *     allowed object is
+     *     byte[]
+     */
+    public void setAdjuntoData(byte[] value) {
+        this.adjuntoData = value;
     }
 
 }

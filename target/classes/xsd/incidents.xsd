@@ -54,6 +54,8 @@
             <xs:element name="id_cliente" type="xs:string"/>
             <xs:element name="descripcion" type="xs:string"/>
             <xs:element name="id_categorizacion" type="xs:string"/>
+            <xs:element name="adjunto_nombre" type="xs:string" minOccurs="0"/>
+            <xs:element name="adjunto_data" type="xs:base64Binary" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>
