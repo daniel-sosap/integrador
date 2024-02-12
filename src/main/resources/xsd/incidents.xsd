@@ -32,7 +32,7 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- Save -->
+    <!-- Creacion de tickets en Service Desk plus -->
     <xs:element name="postIncidentRequest">
         <xs:complexType>
             <xs:sequence>
@@ -52,8 +52,19 @@
         <xs:sequence>
             <xs:element name="idsdp" type="xs:string"/>
             <xs:element name="id_cliente" type="xs:string"/>
+            <xs:element name="cliente" type="xs:string"/>
             <xs:element name="descripcion" type="xs:string"/>
             <xs:element name="id_categorizacion" type="xs:string"/>
+            <xs:element name="resumen" type="xs:string"/>
+            <xs:element name="impacto" type="xs:string"/>
+            <xs:element name="urgencia" type="xs:string"/>
+            <xs:element name="id_agente" type="xs:string"/>
+            <xs:element name="rfc_corto_cliente" type="xs:string"/>
+            <xs:element name="rfc_corto_contacto" type="xs:string"/>
+            <xs:element name="direccion" type="xs:string"/>
+            <xs:element name="id_activo" type="xs:string"/>
+            <xs:element name="id_ticket_padre" type="xs:string" minOccurs="0"/>
+            <xs:element name="fecha_envio" type="xs:date"/>
             <xs:element name="adjunto_nombre" type="xs:string" minOccurs="0"/>
             <xs:element name="adjunto_data" type="xs:base64Binary" minOccurs="0"/>
         </xs:sequence>

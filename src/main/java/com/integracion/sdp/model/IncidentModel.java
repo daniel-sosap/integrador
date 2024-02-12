@@ -8,6 +8,8 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Data
@@ -19,6 +21,17 @@ public class IncidentModel {
     private String id_cliente;
     private String descripcion;
     private String id_categorizacion;
+    private String resumen;
+    private String impacto;
+    private String urgencia;
+    private String id_agente;
+    private String rfc_corto_cliente;
+    private String rfc_corto_contacto;
+    private String direccion;
+    private String id_activo;
+    private String id_ticket_padre;
+    private String adjunto_nombre;
+    private LocalDate fecha_envio;
     private byte[] archivoAdjunto;
     private String nombreadjunto;
     // Métodos para convertir de MultipartFile a byte[] y viceversa
