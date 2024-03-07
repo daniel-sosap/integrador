@@ -4,5 +4,5 @@
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
 //
 
-@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://integracion.com/sdp/gen", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://AMINTUBSRVITSM1A/sdp/gen", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package com.integracion.sdp.gen;

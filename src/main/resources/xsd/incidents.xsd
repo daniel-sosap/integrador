@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integracion.com/sdp/gen"
-           targetNamespace="http://integracion.com/sdp/gen" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://AMINTUBSRVITSM1A/sdp/gen"
+           targetNamespace="http://AMINTUBSRVITSM1A/sdp/gen" elementFormDefault="qualified">
 
-    <!-- Find All -->
-    <xs:element name="getIncidentsRequest">
+    <!-- Agregar nota -->
+    <xs:element name="worklogIncidentRequest">
         <xs:complexType>
             <xs:sequence>
+                <xs:element name="worklog" type="tns:worklog"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="getIncidentsResponse">
+    <xs:element name="worklogIncidentResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="Incidents" type="tns:Incident" maxOccurs="unbounded"/>
+                <xs:element name="worklogResponse" type="tns:worklogResponse"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
-    <xs:element name="getIncidentRequest">
+    <!-- Actualizar ticket nota -->
+    <xs:element name="statusIncidentRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="name" type="xs:string"/>
+                <xs:element name="incidentUpdate" type="tns:incidentUpdate"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="getIncidentResponse">
+    <xs:element name="statusIncidentResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="Incident" type="tns:Incident"/>
+                <xs:element name="statusResponse" type="tns:statusResponse"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -43,30 +44,85 @@
     <xs:element name="postIncidentResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="Incident" type="tns:Incident"/>
+                <xs:element name="IncidentResponse" type="tns:IncidentResponse"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
     <xs:complexType name="Incident">
         <xs:sequence>
-            <xs:element name="idsdp" type="xs:string"/>
-            <xs:element name="id_cliente" type="xs:string"/>
+            <xs:element name="id_cliente" type="xs:string" minOccurs="1"/>
             <xs:element name="cliente" type="xs:string"/>
             <xs:element name="descripcion" type="xs:string"/>
             <xs:element name="id_categorizacion" type="xs:string"/>
             <xs:element name="resumen" type="xs:string"/>
             <xs:element name="impacto" type="xs:string"/>
             <xs:element name="urgencia" type="xs:string"/>
+            <xs:element name="prioridad" type="xs:string"/>
             <xs:element name="id_agente" type="xs:string"/>
             <xs:element name="rfc_corto_cliente" type="xs:string"/>
             <xs:element name="rfc_corto_contacto" type="xs:string"/>
             <xs:element name="direccion" type="xs:string"/>
-            <xs:element name="id_activo" type="xs:string"/>
+            <xs:element name="id_activo" type="xs:string" minOccurs="0"/>
             <xs:element name="id_ticket_padre" type="xs:string" minOccurs="0"/>
-            <xs:element name="fecha_envio" type="xs:date"/>
-            <xs:element name="adjunto_nombre" type="xs:string" minOccurs="0"/>
-            <xs:element name="adjunto_data" type="xs:base64Binary" minOccurs="0"/>
+            <xs:element name="fecha_envio" type="xs:string"/>
+            <xs:element name="token" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="IncidentResponse">
+        <xs:sequence>
+            <xs:element name="idsdp" type="xs:string"/>
+            <xs:element name="resultado_transaccion" type="xs:string"/>
+            <xs:element name="mensaje_transaccion" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="incidentUpdate">
+        <xs:sequence>
+            <xs:element name="idsdp" type="xs:string" minOccurs="1"/>
+            <xs:element name="cliente" type="xs:string"/>
+            <xs:element name="status" type="xs:string"/>
+            <xs:element name="motivo_actualizacion" type="xs:string"/>
+            <xs:element name="impacto" type="xs:string"/>
+            <xs:element name="urgencia" type="xs:string"/>
+            <xs:element name="prioridad" type="xs:string"/>
+            <xs:element name="id_agente" type="xs:string"/>
+            <xs:element name="rfc_corto_cliente" type="xs:string"/>
+            <xs:element name="rfc_corto_contacto" type="xs:string"/>
+            <xs:element name="direccion" type="xs:string"/>
+            <xs:element name="token" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="statusResponse">
+        <xs:sequence>
+            <xs:element name="idsdp" type="xs:string"/>
+            <xs:element name="resultado_transaccion" type="xs:string"/>
+            <xs:element name="mensaje_transaccion" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="worklog">
+        <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="cliente" type="xs:string"/>
+            <xs:element name="idsdp" type="xs:string" minOccurs="1"/>
+            <xs:element name="notas" type="xs:string" minOccurs="1"/>
+            <xs:element name="adjunto1_nombre" type="xs:string" minOccurs="0"/>
+            <xs:element name="adjunto1_data" type="xs:base64Binary" minOccurs="0"/>
+            <xs:element name="adjunto2_nombre" type="xs:string" minOccurs="0"/>
+            <xs:element name="adjunto2_data" type="xs:base64Binary" minOccurs="0"/>
+            <xs:element name="adjunto3_nombre" type="xs:string" minOccurs="0"/>
+            <xs:element name="adjunto3_data" type="xs:base64Binary" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="worklogResponse">
+        <xs:sequence>
+            <xs:element name="idsdp" type="xs:string"/>
+            <xs:element name="resultado_transaccion" type="xs:string"/>
+            <xs:element name="mensaje_transaccion" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>

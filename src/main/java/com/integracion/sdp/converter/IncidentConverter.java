@@ -13,7 +13,7 @@ public class IncidentConverter {
 
     public IncidentModel convertIncidentToIncidentModel(Incident incident) {
         IncidentModel incidentModel = new IncidentModel();
-        incidentModel.setIdsdp(incident.getIdsdp());
+        //incidentModel.setIdsdp(incident.getIdsdp());
         incidentModel.setId_cliente(incident.getIdCliente());
         incidentModel.setDescripcion(incident.getDescripcion());
         incidentModel.setId_categorizacion(incident.getIdCategorizacion());
@@ -25,7 +25,7 @@ public class IncidentConverter {
 
     public Incident convertIncidentModelToIncident(IncidentModel incidentModel) {
         Incident incident = new Incident();
-        incident.setIdsdp(incidentModel.getIdsdp());
+        //incident.setIdsdp(incidentModel.getIdsdp());
         incident.setIdCliente(incidentModel.getId_cliente());
         incident.setDescripcion(incidentModel.getDescripcion());
         incident.setIdCategorizacion(incidentModel.getId_categorizacion());
@@ -51,4 +51,6 @@ public class IncidentConverter {
         }
         return incidents;
     }
+
+
 }

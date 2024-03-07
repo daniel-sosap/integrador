@@ -1,104 +1,200 @@
 package com.integracion.sdp.endpoint;
 
-import com.integracion.sdp.controller.ConsumeSDP;
+import com.integracion.sdp.client.ConsumeSDP;
+import com.integracion.sdp.config.ConfigurationManager;
 import com.integracion.sdp.converter.IncidentConverter;
 import com.integracion.sdp.gen.*;
+import com.integracion.sdp.model.AdjuntoInfo;
 import com.integracion.sdp.model.IncidentModel;
 import com.integracion.sdp.repository.IncidentRepository;
 import com.integracion.sdp.utils.ConsumeSDPAdjunto;
+import com.integracion.sdp.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import java.util.Base64;
 import java.util.List;
 
 @Endpoint
 public class IncidentEndpoint {
 
-    private static final String NAMESPACE_URI = "http://integracion.com/sdp/gen";
+    private static final String NAMESPACE_URI = "http://AMINTUBSRVITSM1A/sdp/gen";
 
     @Autowired
     private IncidentRepository incidentRepository;
-
     @Autowired
     private IncidentConverter incidentConverter;
-
     @Autowired
     private ConsumeSDP consumeSDP;
-
     @Autowired
     private ConsumeSDPAdjunto consumeSDPAdjunto;
+    @Autowired
+    private WSDLRequestIncidente WSDLRequestIncidente;
+    @Autowired
+    private WSDLStatusIncidentRequest WSDLStatusIncidentRequest;
+    @Autowired
+    private WSDLWorklogIncidentRequest WSDLWorklogIncidentRequest;
+    static ConfigurationManager configManager = ConfigurationManager.getInstance();
+    String resultadoTransaccion;
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getIncidentRequest")
+
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "worklogIncidentRequest")
     @ResponsePayload
-    public GetIncidentResponse getIncident(@RequestPayload GetIncidentRequest request) {
-        GetIncidentResponse response = new GetIncidentResponse();
-        IncidentModel incidentModel = incidentRepository.findByIdsdp(request.getName());
-        response.setIncident(incidentConverter.convertIncidentModelToIncident(incidentModel));
+    public WorklogIncidentResponse worklogIncidentRequest(@RequestPayload WorklogIncidentRequest request) {
+
+
+       WorklogIncidentResponse response = new WorklogIncidentResponse();
+
+       WorklogResponse responseWSDL = new WorklogResponse();
+       response.setWorklogResponse(responseWSDL);
+
+        System.out.println("Bitacora desde Remedy" + "\n" + request.getWorklog().getCliente() + "\n" +request.getWorklog().getIdsdp() + "\n" +request.getWorklog().getToken() +"\n" +request.getWorklog().getNotas());
+
+        if(!request.getWorklog().getToken().equals(configManager.getProperty("config.token"))){
+            responseWSDL.setIdsdp("NA");
+            responseWSDL.setMensajeTransaccion("Error token invalido");
+            responseWSDL.setResultadoTransaccion("Error");
+            response.setWorklogResponse(responseWSDL);
+            return response;
+        }
+
+        if (request.getWorklog().getNotas().isEmpty()){
+            responseWSDL.setResultadoTransaccion("Error");
+            responseWSDL.setIdsdp("0");
+            responseWSDL.setMensajeTransaccion("El campo Nota es obligatorio");
+            response.setWorklogResponse(responseWSDL);
+            System.out.println("Bitacora con campo vacio, error");
+            return response;
+        }
+
+        if (request.getWorklog().getIdsdp().isEmpty()){
+            responseWSDL.setResultadoTransaccion("Error");
+            responseWSDL.setIdsdp("0");
+            responseWSDL.setMensajeTransaccion("El campo ID Service Desk plus es obligatorio");
+            response.setWorklogResponse(responseWSDL);
+            System.out.println("Bitacora con campo vacio, error");
+            return response;
+        }
+
+        WSDLWorklogIncidentRequest.imprimeIncidentUpdate(request);
+        List<AdjuntoInfo> adjuntosGuardados = WSDLWorklogIncidentRequest.validaAdjuntos(request);
+        //response = WSDLWorklogIncidentRequest.validaWorklogIncident(request);
+        responseWSDL =consumeSDP.addNoteRequest(request.getWorklog().getIdsdp(),request.getWorklog().getNotas());
+
+        if (!adjuntosGuardados.isEmpty()) {
+            System.out.println("Nota con adjuntos");
+            int adjuntoError = 0;
+            for (AdjuntoInfo adjunto : adjuntosGuardados) {
+                // Llamar a la función addNoteAttachmentRequest para cada adjunto
+                if (!consumeSDP.addNoteAttachmentRequest(adjunto, request.getWorklog().getIdsdp(), responseWSDL.getIdsdp())) {
+                    adjuntoError++;
+                }
+            }
+            System.out.println("Se encontraron " + adjuntoError + " con error");
+        }
+
+        response.setWorklogResponse(responseWSDL);
         return response;
     }
-    
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getIncidentsRequest")
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "statusIncidentRequest")
     @ResponsePayload
-    public GetIncidentsResponse getIncidents(@RequestPayload GetIncidentsRequest request) {
-        GetIncidentsResponse response = new GetIncidentsResponse();
-        List<IncidentModel> incidentModels = incidentRepository.findAll();
-        List<Incident> incidents = incidentConverter.convertIncidentModelsToIncidents(incidentModels);
-        response.getIncidents().addAll(incidents);
+    public StatusIncidentResponse StatusIncidentRequest(@RequestPayload StatusIncidentRequest request) {
+
+
+        StatusIncidentResponse response = new StatusIncidentResponse();
+
+        System.out.println(request.getIncidentUpdate().getIdsdp());
+        System.out.println(request.getIncidentUpdate().getCliente());
+        System.out.println(request.getIncidentUpdate().getImpacto());
+
+        // Obtiene el incidente recibido por WSDL
+        IncidentUpdate incidentUpdate = request.getIncidentUpdate();
+
+        incidentUpdate.setImpacto(WSDLStatusIncidentRequest.mapeoImpacto(incidentUpdate.getImpacto()));
+        incidentUpdate.setUrgencia(WSDLStatusIncidentRequest.mapeoUrgencia(incidentUpdate.getUrgencia()));
+        incidentUpdate.setPrioridad(WSDLStatusIncidentRequest.mapeoPrioridad(incidentUpdate.getPrioridad()));
+        incidentUpdate.setStatus(WSDLRequestIncidente.mapeoStatus(incidentUpdate.getStatus()));
+
+        System.out.println("Actualizacion de Incidente Recibido");
+        WSDLStatusIncidentRequest.imprimeIncidentUpdate(incidentUpdate);
+        // Valida el incidente
+        String resultadoTransaccion = WSDLStatusIncidentRequest.validaIncidentUpdate(incidentUpdate);
+        StatusResponse statusResponse = new StatusResponse();
+        statusResponse.setIdsdp("123");
+        statusResponse.setMensajeTransaccion("Completada");
+        statusResponse.setResultadoTransaccion("Exitoso");
+        response.setStatusResponse(statusResponse);
+        //Si la validacion mostro algun error
+        if(!resultadoTransaccion.isEmpty()) {
+            statusResponse.setIdsdp("NA");
+            statusResponse.setMensajeTransaccion(resultadoTransaccion);
+            statusResponse.setResultadoTransaccion("Error");
+            response.setStatusResponse(statusResponse);
+            return response;
+        }
+        //Si la validacion no mostro error
+        else if (resultadoTransaccion.isEmpty()){
+            statusResponse =consumeSDP.updateRequest(incidentUpdate);
+            System.out.println("AQUI SE REALIZA EL CONSUMO DEL SERVICIO UPDATEREQUEST");
+            statusResponse.setIdsdp(incidentUpdate.getIdsdp());
+
+        }
+        // Imprime el estado de la transacción
+        System.out.println("Ejecucion de metodo PostIncidentResponse: " + incidentUpdate.getIdsdp());
         return response;
     }
-    
+
+    //Endpoint para creacion de incidentes
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "postIncidentRequest")
     @ResponsePayload
     public PostIncidentResponse postIncidents(@RequestPayload PostIncidentRequest request) {
         PostIncidentResponse response = new PostIncidentResponse();
+        // Obtiene el incidente recibido por WSDL
+        Incident incidenteSAT = request.getIncident();
+        incidenteSAT.setImpacto(WSDLRequestIncidente.mapeoImpacto(incidenteSAT.getImpacto()));
+        incidenteSAT.setUrgencia(WSDLRequestIncidente.mapeoUrgencia(incidenteSAT.getUrgencia()));
+        incidenteSAT.setPrioridad(WSDLRequestIncidente.mapeoPrioridad(incidenteSAT.getPrioridad()));
 
-        Incident incidentFromRequest = request.getIncident();
 
-        //Llamada a Service Desk plus para crear ticket
-        String descripcion = incidentFromRequest.getDescripcion();
-        System.out.println("Valor de Descripcion: " + descripcion);
-        String incidenteServiceDeskplus = consumeSDP.sendRequest(descripcion);
+        System.out.println("Incidente Recibido");
+        WSDLRequestIncidente.imprimeIncidente(incidenteSAT);
+        //Valida el incidente
+        String resultadoTransaccion = WSDLRequestIncidente.validaIncidente(incidenteSAT);
+        IncidentResponse incidentSDP = new IncidentResponse();
 
-        //Llamada a service desk plus para agregar adjunto
-
-        // Obtener el nombre y los datos del archivo adjunto desde la solicitud
-        String adjuntoNombre = incidentFromRequest.getAdjuntoNombre();
-        byte[] adjuntoData = incidentFromRequest.getAdjuntoData();
-        String rutaArchivo = null;
-        System.out.println("Nombre del archivo adjunto " + adjuntoNombre);
-        // Guardar el archivo adjunto en la carpeta temporal
-        if (adjuntoData != null && adjuntoNombre != null) {
-            try {
-                 rutaArchivo = System.getProperty("java.io.tmpdir") + File.separator + adjuntoNombre;
-                FileOutputStream fos = new FileOutputStream(rutaArchivo);
-                fos.write(adjuntoData);
-                fos.close();
-                System.out.println("Archivo guardado en la carpeta temporal: " + rutaArchivo);
-            } catch (IOException e) {
-                System.err.println("Error al guardar el archivo en la carpeta temporal: " + e.getMessage());
-                e.printStackTrace();
-            }
+        //Si la validacion mostro algun error
+        if(!resultadoTransaccion.isEmpty()) {
+            incidentSDP.setIdsdp("NA");
+            incidentSDP.setMensajeTransaccion(resultadoTransaccion);
+            incidentSDP.setResultadoTransaccion("Error");
         }
 
-        // Llamar al método subirArchivo de ConsumeSDPAdjunto para manejar el archivo adjunto
-        if (adjuntoData != null && adjuntoNombre != null) {
-            System.out.println("Entro al if para mandar el archivo");
-            consumeSDPAdjunto.subirArchivo(rutaArchivo, adjuntoNombre, incidenteServiceDeskplus);
+        if(!incidenteSAT.getToken().equals(configManager.getProperty("config.token"))){
+            resultadoTransaccion = "Error token invalido";
+            incidentSDP.setIdsdp("NA");
+            incidentSDP.setMensajeTransaccion(resultadoTransaccion);
+            incidentSDP.setResultadoTransaccion("Error");
         }
 
-        IncidentModel incidentModel = incidentConverter.convertIncidentToIncidentModel(request.getIncident());
-        Incident incident = incidentConverter.convertIncidentModelToIncident(incidentRepository.save(incidentModel));
-        incident.setIdsdp(incidenteServiceDeskplus);
-        System.out.println("incidenteServiceDeskplus = " + incidenteServiceDeskplus);
-        System.out.println("Ejecucion de metodo PostIncidentResponse");
-        response.setIncident(incident);
+        //Si la validacion no mostro error
+        else if (resultadoTransaccion.isEmpty()){
+        incidentSDP =consumeSDP.creaRequest(incidenteSAT);
+
+        }
+        // Imprime el estado de la transacción
+        System.out.println("Ejecucion de metodo PostIncidentResponse: " + incidentSDP.getIdsdp());
+
+        // Construye la respuesta
+        //PostIncidentResponse response = new PostIncidentResponse();
+        response.setIncidentResponse(incidentSDP);
+
         return response;
     }
 }

@@ -5,32 +5,59 @@
 Este archivo ha sido generado por Eclipse Implementation of JAXB v4.0.2 
 Visite https://eclipse-ee4j.github.io/jaxb-ri 
 Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-Generado el: 2024.02.10 a las 10:42:35 PM CST
+Generado el: 2024.03.06 a las 08:24:15 AM CST
   -->
-  <bindings scd="x-schema::tns" xmlns:tns="http://integracion.com/sdp/gen">
+  <bindings scd="x-schema::tns" xmlns:tns="http://AMINTUBSRVITSM1A/sdp/gen">
     <schemaBindings map="false">
       <package name="com.integracion.sdp.gen"/>
     </schemaBindings>
-    <bindings scd="tns:getIncidentsRequest">
-      <class ref="com.integracion.sdp.gen.GetIncidentsRequest"/>
+    <bindings scd="tns:worklogIncidentRequest">
+      <class ref="com.integracion.sdp.gen.WorklogIncidentRequest"/>
     </bindings>
-    <bindings scd="tns:getIncidentsResponse">
-      <class ref="com.integracion.sdp.gen.GetIncidentsResponse"/>
+    <bindings scd="~tns:worklog">
+      <class ref="com.integracion.sdp.gen.Worklog"/>
     </bindings>
-    <bindings scd="~tns:Incident">
-      <class ref="com.integracion.sdp.gen.Incident"/>
+    <bindings scd="tns:worklogIncidentResponse">
+      <class ref="com.integracion.sdp.gen.WorklogIncidentResponse"/>
     </bindings>
-    <bindings scd="tns:getIncidentRequest">
-      <class ref="com.integracion.sdp.gen.GetIncidentRequest"/>
+    <bindings scd="~tns:worklogResponse">
+      <class ref="com.integracion.sdp.gen.WorklogResponse"/>
     </bindings>
-    <bindings scd="tns:getIncidentResponse">
-      <class ref="com.integracion.sdp.gen.GetIncidentResponse"/>
+    <bindings scd="tns:statusIncidentRequest">
+      <class ref="com.integracion.sdp.gen.StatusIncidentRequest"/>
+    </bindings>
+    <bindings scd="~tns:incidentUpdate">
+      <class ref="com.integracion.sdp.gen.IncidentUpdate"/>
+    </bindings>
+    <bindings scd="tns:statusIncidentResponse">
+      <class ref="com.integracion.sdp.gen.StatusIncidentResponse"/>
+    </bindings>
+    <bindings scd="~tns:statusResponse">
+      <class ref="com.integracion.sdp.gen.StatusResponse"/>
     </bindings>
     <bindings scd="tns:postIncidentRequest">
       <class ref="com.integracion.sdp.gen.PostIncidentRequest"/>
     </bindings>
+    <bindings scd="~tns:Incident">
+      <class ref="com.integracion.sdp.gen.Incident"/>
+    </bindings>
     <bindings scd="tns:postIncidentResponse">
       <class ref="com.integracion.sdp.gen.PostIncidentResponse"/>
+    </bindings>
+    <bindings scd="~tns:IncidentResponse">
+      <class ref="com.integracion.sdp.gen.IncidentResponse"/>
+    </bindings>
+    <bindings scd="tns:postWORequest">
+      <class ref="com.integracion.sdp.gen.PostWORequest"/>
+    </bindings>
+    <bindings scd="~tns:WorkOrder">
+      <class ref="com.integracion.sdp.gen.WorkOrder"/>
+    </bindings>
+    <bindings scd="tns:postWOResponse">
+      <class ref="com.integracion.sdp.gen.PostWOResponse"/>
+    </bindings>
+    <bindings scd="~tns:WOResponse">
+      <class ref="com.integracion.sdp.gen.WOResponse"/>
     </bindings>
   </bindings>
 </bindings>

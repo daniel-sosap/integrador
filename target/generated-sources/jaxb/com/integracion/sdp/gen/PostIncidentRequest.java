@@ -24,7 +24,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="Incident" type="{http://integracion.com/sdp/gen}Incident"/>
+ *         <element name="Incident" type="{http://AMINTUBSRVITSM1A/sdp/gen}Incident"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>

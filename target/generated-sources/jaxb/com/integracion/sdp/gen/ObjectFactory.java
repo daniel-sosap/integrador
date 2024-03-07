@@ -36,53 +36,83 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetIncidentsRequest }
+     * Create an instance of {@link WorklogIncidentRequest }
      * 
      * @return
-     *     the new instance of {@link GetIncidentsRequest }
+     *     the new instance of {@link WorklogIncidentRequest }
      */
-    public GetIncidentsRequest createGetIncidentsRequest() {
-        return new GetIncidentsRequest();
+    public WorklogIncidentRequest createWorklogIncidentRequest() {
+        return new WorklogIncidentRequest();
     }
 
     /**
-     * Create an instance of {@link GetIncidentsResponse }
+     * Create an instance of {@link Worklog }
      * 
      * @return
-     *     the new instance of {@link GetIncidentsResponse }
+     *     the new instance of {@link Worklog }
      */
-    public GetIncidentsResponse createGetIncidentsResponse() {
-        return new GetIncidentsResponse();
+    public Worklog createWorklog() {
+        return new Worklog();
     }
 
     /**
-     * Create an instance of {@link Incident }
+     * Create an instance of {@link WorklogIncidentResponse }
      * 
      * @return
-     *     the new instance of {@link Incident }
+     *     the new instance of {@link WorklogIncidentResponse }
      */
-    public Incident createIncident() {
-        return new Incident();
+    public WorklogIncidentResponse createWorklogIncidentResponse() {
+        return new WorklogIncidentResponse();
     }
 
     /**
-     * Create an instance of {@link GetIncidentRequest }
+     * Create an instance of {@link WorklogResponse }
      * 
      * @return
-     *     the new instance of {@link GetIncidentRequest }
+     *     the new instance of {@link WorklogResponse }
      */
-    public GetIncidentRequest createGetIncidentRequest() {
-        return new GetIncidentRequest();
+    public WorklogResponse createWorklogResponse() {
+        return new WorklogResponse();
     }
 
     /**
-     * Create an instance of {@link GetIncidentResponse }
+     * Create an instance of {@link StatusIncidentRequest }
      * 
      * @return
-     *     the new instance of {@link GetIncidentResponse }
+     *     the new instance of {@link StatusIncidentRequest }
      */
-    public GetIncidentResponse createGetIncidentResponse() {
-        return new GetIncidentResponse();
+    public StatusIncidentRequest createStatusIncidentRequest() {
+        return new StatusIncidentRequest();
+    }
+
+    /**
+     * Create an instance of {@link IncidentUpdate }
+     * 
+     * @return
+     *     the new instance of {@link IncidentUpdate }
+     */
+    public IncidentUpdate createIncidentUpdate() {
+        return new IncidentUpdate();
+    }
+
+    /**
+     * Create an instance of {@link StatusIncidentResponse }
+     * 
+     * @return
+     *     the new instance of {@link StatusIncidentResponse }
+     */
+    public StatusIncidentResponse createStatusIncidentResponse() {
+        return new StatusIncidentResponse();
+    }
+
+    /**
+     * Create an instance of {@link StatusResponse }
+     * 
+     * @return
+     *     the new instance of {@link StatusResponse }
+     */
+    public StatusResponse createStatusResponse() {
+        return new StatusResponse();
     }
 
     /**
@@ -96,6 +126,16 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Incident }
+     * 
+     * @return
+     *     the new instance of {@link Incident }
+     */
+    public Incident createIncident() {
+        return new Incident();
+    }
+
+    /**
      * Create an instance of {@link PostIncidentResponse }
      * 
      * @return
@@ -103,6 +143,56 @@ public class ObjectFactory {
      */
     public PostIncidentResponse createPostIncidentResponse() {
         return new PostIncidentResponse();
+    }
+
+    /**
+     * Create an instance of {@link IncidentResponse }
+     * 
+     * @return
+     *     the new instance of {@link IncidentResponse }
+     */
+    public IncidentResponse createIncidentResponse() {
+        return new IncidentResponse();
+    }
+
+    /**
+     * Create an instance of {@link PostWORequest }
+     * 
+     * @return
+     *     the new instance of {@link PostWORequest }
+     */
+    public PostWORequest createPostWORequest() {
+        return new PostWORequest();
+    }
+
+    /**
+     * Create an instance of {@link WorkOrder }
+     * 
+     * @return
+     *     the new instance of {@link WorkOrder }
+     */
+    public WorkOrder createWorkOrder() {
+        return new WorkOrder();
+    }
+
+    /**
+     * Create an instance of {@link PostWOResponse }
+     * 
+     * @return
+     *     the new instance of {@link PostWOResponse }
+     */
+    public PostWOResponse createPostWOResponse() {
+        return new PostWOResponse();
+    }
+
+    /**
+     * Create an instance of {@link WOResponse }
+     * 
+     * @return
+     *     the new instance of {@link WOResponse }
+     */
+    public WOResponse createWOResponse() {
+        return new WOResponse();
     }
 
 }

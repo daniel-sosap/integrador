@@ -24,7 +24,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="Incident" type="{http://integracion.com/sdp/gen}Incident"/>
+ *         <element name="IncidentResponse" type="{http://AMINTUBSRVITSM1A/sdp/gen}IncidentResponse"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>
@@ -35,36 +35,36 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "incident"
+    "incidentResponse"
 })
 @XmlRootElement(name = "postIncidentResponse")
 public class PostIncidentResponse {
 
-    @XmlElement(name = "Incident", required = true)
-    protected Incident incident;
+    @XmlElement(name = "IncidentResponse", required = true)
+    protected IncidentResponse incidentResponse;
 
     /**
-     * Obtiene el valor de la propiedad incident.
+     * Obtiene el valor de la propiedad incidentResponse.
      * 
      * @return
      *     possible object is
-     *     {@link Incident }
+     *     {@link IncidentResponse }
      *     
      */
-    public Incident getIncident() {
-        return incident;
+    public IncidentResponse getIncidentResponse() {
+        return incidentResponse;
     }
 
     /**
-     * Define el valor de la propiedad incident.
+     * Define el valor de la propiedad incidentResponse.
      * 
      * @param value
      *     allowed object is
-     *     {@link Incident }
+     *     {@link IncidentResponse }
      *     
      */
-    public void setIncident(Incident value) {
-        this.incident = value;
+    public void setIncidentResponse(IncidentResponse value) {
+        this.incidentResponse = value;
     }
 
 }

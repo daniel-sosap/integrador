@@ -30,7 +30,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("incidentPort");
         wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("http://integracion.com/sdp/gen");
+        wsdl11Definition.setTargetNamespace("http://AMINTUBSRVITSM1A/sdp/gen");
         wsdl11Definition.setSchema(incidentsSchema);
         return wsdl11Definition;
     }
@@ -39,5 +39,21 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     public XsdSchema incidentsSchema() {
         return new SimpleXsdSchema(new ClassPathResource("xsd/incidents.xsd"));
     }
-    
+
+    @Bean(name = "workorders")
+    public DefaultWsdl11Definition workordersWsdl11Definition(XsdSchema workordersSchema) {
+        DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+        wsdl11Definition.setPortTypeName("workorderPort");
+        wsdl11Definition.setLocationUri("/ws");
+        wsdl11Definition.setTargetNamespace("http://AMINTUBSRVITSM1A/sdp/gen");
+        wsdl11Definition.setSchema(workordersSchema);
+        return wsdl11Definition;
+    }
+
+    @Bean
+    public XsdSchema workordersSchema() {
+        return new SimpleXsdSchema(new ClassPathResource("xsd/workorders.xsd"));
+    }
+
+
 }

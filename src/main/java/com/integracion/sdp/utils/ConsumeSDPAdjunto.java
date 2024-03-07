@@ -23,7 +23,7 @@ public class ConsumeSDPAdjunto {
                 .header("Cookie", "SDPSESSIONID=B00AD9982F116711936E38E2305699FA; _zcsr_tmp=c91c4516-ad55-439f-a023-ed7a91821280; sdpcsrfcookie=c91c4516-ad55-439f-a023-ed7a91821280; sdplogincsrfcookie=cec7cc6a-5e42-4c0f-96c4-6dcae358b10f")
                 .field("file", new File(rutaArchivo),nombre)
                 .asString();
-        // Imprime la respuesta
+        // WSDLRequestIncidente la respuesta
         System.out.println(response.getBody());
     }
 }

@@ -19,6 +19,7 @@ public class IncidentModel {
     private int id;
     private String idsdp;
     private String id_cliente;
+    private String cliente;
     private String descripcion;
     private String id_categorizacion;
     private String resumen;
@@ -34,6 +35,8 @@ public class IncidentModel {
     private LocalDate fecha_envio;
     private byte[] archivoAdjunto;
     private String nombreadjunto;
+    private String resultadoMensaje;
+    private String estadoTransaccion;
     // Métodos para convertir de MultipartFile a byte[] y viceversa
     public void setArchivoAdjunto(MultipartFile archivo) {
         try {

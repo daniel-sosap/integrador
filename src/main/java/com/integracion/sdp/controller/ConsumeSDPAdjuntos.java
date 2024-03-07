@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class ConsumeSDP {
+public class ConsumeSDPAdjuntos {
 String input_data;
 
-    @GetMapping("/sendRequest")
+    @GetMapping("/sendRequestAttachments")
     public String sendRequest(String descripcion) {
         //String descripcion = "Prueba con descripcion";
 input_data = "{\"request\":{\"subject\": \""+ descripcion + "\",\"requester\": {\"name\": \"Temp User\"}}}";

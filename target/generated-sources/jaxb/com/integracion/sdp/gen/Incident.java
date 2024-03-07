@@ -7,11 +7,9 @@
 
 package com.integracion.sdp.gen;
 
-import javax.xml.datatype.XMLGregorianCalendar;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlType;
 
 
@@ -25,7 +23,6 @@ import jakarta.xml.bind.annotation.XmlType;
  *   <complexContent>
  *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       <sequence>
- *         <element name="idsdp" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         <element name="id_cliente" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         <element name="cliente" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         <element name="descripcion" type="{http://www.w3.org/2001/XMLSchema}string"/>
@@ -33,15 +30,15 @@ import jakarta.xml.bind.annotation.XmlType;
  *         <element name="resumen" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         <element name="impacto" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         <element name="urgencia" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="prioridad" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         <element name="id_agente" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         <element name="rfc_corto_cliente" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         <element name="rfc_corto_contacto" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         <element name="direccion" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         <element name="id_activo" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="id_activo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         <element name="id_ticket_padre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="fecha_envio" type="{http://www.w3.org/2001/XMLSchema}date" minOccurs="0"/>
- *         <element name="adjunto_nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         <element name="adjunto_data" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/>
+ *         <element name="fecha_envio" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         <element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       </sequence>
  *     </restriction>
  *   </complexContent>
@@ -52,7 +49,6 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Incident", propOrder = {
-    "idsdp",
     "idCliente",
     "cliente",
     "descripcion",
@@ -60,6 +56,7 @@ import jakarta.xml.bind.annotation.XmlType;
     "resumen",
     "impacto",
     "urgencia",
+    "prioridad",
     "idAgente",
     "rfcCortoCliente",
     "rfcCortoContacto",
@@ -67,13 +64,10 @@ import jakarta.xml.bind.annotation.XmlType;
     "idActivo",
     "idTicketPadre",
     "fechaEnvio",
-    "adjuntoNombre",
-    "adjuntoData"
+    "token"
 })
 public class Incident {
 
-    @XmlElement(required = true)
-    protected String idsdp;
     @XmlElement(name = "id_cliente", required = true)
     protected String idCliente;
     @XmlElement(required = true)
@@ -88,6 +82,8 @@ public class Incident {
     protected String impacto;
     @XmlElement(required = true)
     protected String urgencia;
+    @XmlElement(required = true)
+    protected String prioridad;
     @XmlElement(name = "id_agente", required = true)
     protected String idAgente;
     @XmlElement(name = "rfc_corto_cliente", required = true)
@@ -96,41 +92,14 @@ public class Incident {
     protected String rfcCortoContacto;
     @XmlElement(required = true)
     protected String direccion;
-    @XmlElement(name = "id_activo", required = true)
+    @XmlElement(name = "id_activo")
     protected String idActivo;
     @XmlElement(name = "id_ticket_padre")
     protected String idTicketPadre;
-    @XmlElement(name = "fecha_envio")
-    @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar fechaEnvio;
-    @XmlElement(name = "adjunto_nombre")
-    protected String adjuntoNombre;
-    @XmlElement(name = "adjunto_data")
-    protected byte[] adjuntoData;
-
-    /**
-     * Obtiene el valor de la propiedad idsdp.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getIdsdp() {
-        return idsdp;
-    }
-
-    /**
-     * Define el valor de la propiedad idsdp.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setIdsdp(String value) {
-        this.idsdp = value;
-    }
+    @XmlElement(name = "fecha_envio", required = true)
+    protected String fechaEnvio;
+    @XmlElement(required = true)
+    protected String token;
 
     /**
      * Obtiene el valor de la propiedad idCliente.
@@ -301,6 +270,30 @@ public class Incident {
     }
 
     /**
+     * Obtiene el valor de la propiedad prioridad.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPrioridad() {
+        return prioridad;
+    }
+
+    /**
+     * Define el valor de la propiedad prioridad.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPrioridad(String value) {
+        this.prioridad = value;
+    }
+
+    /**
      * Obtiene el valor de la propiedad idAgente.
      * 
      * @return
@@ -449,10 +442,10 @@ public class Incident {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public XMLGregorianCalendar getFechaEnvio() {
+    public String getFechaEnvio() {
         return fechaEnvio;
     }
 
@@ -461,57 +454,35 @@ public class Incident {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public void setFechaEnvio(XMLGregorianCalendar value) {
+    public void setFechaEnvio(String value) {
         this.fechaEnvio = value;
     }
 
     /**
-     * Obtiene el valor de la propiedad adjuntoNombre.
+     * Obtiene el valor de la propiedad token.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getAdjuntoNombre() {
-        return adjuntoNombre;
+    public String getToken() {
+        return token;
     }
 
     /**
-     * Define el valor de la propiedad adjuntoNombre.
+     * Define el valor de la propiedad token.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setAdjuntoNombre(String value) {
-        this.adjuntoNombre = value;
-    }
-
-    /**
-     * Obtiene el valor de la propiedad adjuntoData.
-     * 
-     * @return
-     *     possible object is
-     *     byte[]
-     */
-    public byte[] getAdjuntoData() {
-        return adjuntoData;
-    }
-
-    /**
-     * Define el valor de la propiedad adjuntoData.
-     * 
-     * @param value
-     *     allowed object is
-     *     byte[]
-     */
-    public void setAdjuntoData(byte[] value) {
-        this.adjuntoData = value;
+    public void setToken(String value) {
+        this.token = value;
     }
 
 }
