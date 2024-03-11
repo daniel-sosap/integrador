@@ -5,7 +5,7 @@
 Este archivo ha sido generado por Eclipse Implementation of JAXB v4.0.2 
 Visite https://eclipse-ee4j.github.io/jaxb-ri 
 Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-Generado el: 2024.03.06 a las 08:24:15 AM CST
+Generado el: 2024.03.09 a las 07:00:48 PM CST
   -->
   <bindings scd="x-schema::tns" xmlns:tns="http://AMINTUBSRVITSM1A/sdp/gen">
     <schemaBindings map="false">
@@ -46,6 +46,30 @@ Generado el: 2024.03.06 a las 08:24:15 AM CST
     </bindings>
     <bindings scd="~tns:IncidentResponse">
       <class ref="com.integracion.sdp.gen.IncidentResponse"/>
+    </bindings>
+    <bindings scd="tns:worklogWORequest">
+      <class ref="com.integracion.sdp.gen.WorklogWORequest"/>
+    </bindings>
+    <bindings scd="~tns:WOworklog">
+      <class ref="com.integracion.sdp.gen.WOworklog"/>
+    </bindings>
+    <bindings scd="tns:worklogWOResponse">
+      <class ref="com.integracion.sdp.gen.WorklogWOResponse"/>
+    </bindings>
+    <bindings scd="~tns:commentWOResponse">
+      <class ref="com.integracion.sdp.gen.CommentWOResponse"/>
+    </bindings>
+    <bindings scd="tns:statusWORequest">
+      <class ref="com.integracion.sdp.gen.StatusWORequest"/>
+    </bindings>
+    <bindings scd="~tns:woUpdate">
+      <class ref="com.integracion.sdp.gen.WoUpdate"/>
+    </bindings>
+    <bindings scd="tns:statusWOResponse">
+      <class ref="com.integracion.sdp.gen.StatusWOResponse"/>
+    </bindings>
+    <bindings scd="~tns:updateWOResponse">
+      <class ref="com.integracion.sdp.gen.UpdateWOResponse"/>
     </bindings>
     <bindings scd="tns:postWORequest">
       <class ref="com.integracion.sdp.gen.PostWORequest"/>

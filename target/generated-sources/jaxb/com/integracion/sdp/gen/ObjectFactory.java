@@ -156,6 +156,86 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link WorklogWORequest }
+     * 
+     * @return
+     *     the new instance of {@link WorklogWORequest }
+     */
+    public WorklogWORequest createWorklogWORequest() {
+        return new WorklogWORequest();
+    }
+
+    /**
+     * Create an instance of {@link WOworklog }
+     * 
+     * @return
+     *     the new instance of {@link WOworklog }
+     */
+    public WOworklog createWOworklog() {
+        return new WOworklog();
+    }
+
+    /**
+     * Create an instance of {@link WorklogWOResponse }
+     * 
+     * @return
+     *     the new instance of {@link WorklogWOResponse }
+     */
+    public WorklogWOResponse createWorklogWOResponse() {
+        return new WorklogWOResponse();
+    }
+
+    /**
+     * Create an instance of {@link CommentWOResponse }
+     * 
+     * @return
+     *     the new instance of {@link CommentWOResponse }
+     */
+    public CommentWOResponse createCommentWOResponse() {
+        return new CommentWOResponse();
+    }
+
+    /**
+     * Create an instance of {@link StatusWORequest }
+     * 
+     * @return
+     *     the new instance of {@link StatusWORequest }
+     */
+    public StatusWORequest createStatusWORequest() {
+        return new StatusWORequest();
+    }
+
+    /**
+     * Create an instance of {@link WoUpdate }
+     * 
+     * @return
+     *     the new instance of {@link WoUpdate }
+     */
+    public WoUpdate createWoUpdate() {
+        return new WoUpdate();
+    }
+
+    /**
+     * Create an instance of {@link StatusWOResponse }
+     * 
+     * @return
+     *     the new instance of {@link StatusWOResponse }
+     */
+    public StatusWOResponse createStatusWOResponse() {
+        return new StatusWOResponse();
+    }
+
+    /**
+     * Create an instance of {@link UpdateWOResponse }
+     * 
+     * @return
+     *     the new instance of {@link UpdateWOResponse }
+     */
+    public UpdateWOResponse createUpdateWOResponse() {
+        return new UpdateWOResponse();
+    }
+
+    /**
      * Create an instance of {@link PostWORequest }
      * 
      * @return

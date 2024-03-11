@@ -34,7 +34,7 @@ public class ConsumeRemedySOAPUpdateINC {
         SOAPBody soapBody = envelope.getBody();
         SOAPElement actualizaIncidentesElem = soapBody.addChildElement("Actualiza_Incidentes", "urn");
         actualizaIncidentesElem.addChildElement("TipoDeOperacion", "urn").addTextNode("A_INC");
-        actualizaIncidentesElem.addChildElement("NombreProveedor", "urn").addTextNode("SAT");
+        actualizaIncidentesElem.addChildElement("NombreProveedor", "urn").addTextNode("MESA_SERVICIO_SENHA2");
         actualizaIncidentesElem.addChildElement("IDTicketInterno", "urn").addTextNode("INC0001INTLJ");
         actualizaIncidentesElem.addChildElement("EstadoNuevo", "urn").addTextNode("2");
         actualizaIncidentesElem.addChildElement("MotivoEstado", "urn").addTextNode("");

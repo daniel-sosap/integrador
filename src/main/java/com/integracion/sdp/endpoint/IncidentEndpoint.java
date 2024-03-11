@@ -142,7 +142,7 @@ public class IncidentEndpoint {
         //Si la validacion no mostro error
         else if (resultadoTransaccion.isEmpty()){
             statusResponse =consumeSDP.updateRequest(incidentUpdate);
-            System.out.println("AQUI SE REALIZA EL CONSUMO DEL SERVICIO UPDATEREQUEST");
+            System.out.println("Consumo del servicio Update Request");
             statusResponse.setIdsdp(incidentUpdate.getIdsdp());
 
         }

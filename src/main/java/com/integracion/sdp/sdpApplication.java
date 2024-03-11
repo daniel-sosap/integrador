@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import java.util.Properties;
 
 
 @SpringBootApplication
+@EnableScheduling
 public class sdpApplication {
 	static ConfigurationManager configManager = ConfigurationManager.getInstance();
 
@@ -36,7 +38,7 @@ public class sdpApplication {
 	public static void main(String[] args) throws SOAPException {
 		SpringApplication.run(sdpApplication.class, args);
 
-		System.out.println("version 050324_0200");
+		System.out.println("version 090324_2000");
 		ConsumeSDP consumeSDP = new ConsumeSDP();
 		//consumeSDP.addNoteRequest("21","Nota desde intellij 2 marzo 2_38");
 

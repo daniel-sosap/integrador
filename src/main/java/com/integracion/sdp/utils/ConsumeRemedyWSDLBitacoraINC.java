@@ -44,8 +44,8 @@ public class ConsumeRemedyWSDLBitacoraINC {
         // SOAP Body
         SOAPBody soapBody = envelope.getBody();
         SOAPElement creaBitacoraElem = soapBody.addChildElement("Crea_Bitacora", "urn");
-        creaBitacoraElem.addChildElement("TipoDeOperacion", "urn").addTextNode("Bitacora");
-        creaBitacoraElem.addChildElement("NombreProveedor", "urn").addTextNode("SAT");
+        creaBitacoraElem.addChildElement("TipoDeOperacion", "urn").addTextNode("C_IT_INC");
+        creaBitacoraElem.addChildElement("NombreProveedor", "urn").addTextNode("MESA_SERVICIO_SENHA2");
         creaBitacoraElem.addChildElement("IDTicketInterno", "urn").addTextNode("INC00001");
         creaBitacoraElem.addChildElement("Notas", "urn").addTextNode(notas);
 
