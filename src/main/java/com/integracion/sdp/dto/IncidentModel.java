@@ -1,4 +1,4 @@
-package com.integracion.sdp.model;
+package com.integracion.sdp.dto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

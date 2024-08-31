@@ -1,10 +1,9 @@
 package com.integracion.sdp.endpoint;
 
-import com.integracion.sdp.client.ConsumeSDP;
 import com.integracion.sdp.client.ConsumeSDPWO;
 import com.integracion.sdp.config.ConfigurationManager;
 import com.integracion.sdp.gen.*;
-import com.integracion.sdp.model.AdjuntoInfo;
+import com.integracion.sdp.dto.AdjuntoInfo;
 import com.integracion.sdp.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -38,8 +37,6 @@ public class WorkOrderEndpoint {
         PostWOResponse response = new PostWOResponse();
         // Lógica de procesamiento de la solicitud de workorder
         WorkOrder WOSAT = request.getWorkOrder();
-//        incidenteSAT.setImpacto(WSDLRequestIncidente.mapeoImpacto(incidenteSAT.getImpacto()));
-//        incidenteSAT.setUrgencia(WSDLRequestIncidente.mapeoUrgencia(incidenteSAT.getUrgencia()));
         WOSAT.setPrioridad(WSDLRequestWO.mapeoPrioridad(WOSAT.getPrioridad()));
 
 
@@ -72,8 +69,7 @@ public class WorkOrderEndpoint {
         // Imprime el estado de la transacción
         System.out.println("Ejecucion de metodo PostIncidentResponse: " + woSDP.getIdsdp());
 
-        // Construye la respuesta
-        //PostIncidentResponse response = new PostIncidentResponse();
+
         response.setWOResponse(woSDP);
 
         return response;
@@ -88,13 +84,11 @@ public class WorkOrderEndpoint {
 
         System.out.println(request.getWoUpdate().getIdsdp());
         System.out.println(request.getWoUpdate().getCliente());
-//        System.out.println(request.getWoUpdate().getImpacto());
 
         // Obtiene el incidente recibido por WSDL
         WoUpdate woUpdate = request.getWoUpdate();
 
-//        incidentUpdate.setImpacto(WSDLStatusIncidentRequest.mapeoImpacto(incidentUpdate.getImpacto()));
-//        incidentUpdate.setUrgencia(WSDLStatusIncidentRequest.mapeoUrgencia(incidentUpdate.getUrgencia()));
+
         woUpdate.setPrioridad(WSDLStatusWoRequest.mapeoPrioridad(woUpdate.getPrioridad()));
         woUpdate.setStatus(WSDLRequestWO.mapeoStatus(woUpdate.getStatus()));
 

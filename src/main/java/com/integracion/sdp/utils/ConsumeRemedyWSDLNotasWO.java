@@ -75,15 +75,15 @@ public class ConsumeRemedyWSDLNotasWO {
 
         if (adjunto1Nombre != null && !adjunto1Nombre.isEmpty()) {
             creaBitacoraElem.addChildElement("Adjunto01_attachmentName", "urn").addTextNode(adjunto1Nombre);
-            creaBitacoraElem.addChildElement("Adjunto01_attachmentData", "urn").addTextNode(adjunto1Data);
+            creaBitacoraElem.addChildElement("Adjunto01_attachmentData", "urn").addTextNode(getBase64EncodedStringFromFile(adjunto1Data));
         }
         if (adjunto2Nombre != null && !adjunto2Nombre.isEmpty()) {
             creaBitacoraElem.addChildElement("Adjunto02_attachmentName", "urn").addTextNode(adjunto2Nombre);
-            creaBitacoraElem.addChildElement("Adjunto02_attachmentData", "urn").addTextNode(adjunto2Data);
+            creaBitacoraElem.addChildElement("Adjunto02_attachmentData", "urn").addTextNode(getBase64EncodedStringFromFile(adjunto2Data));
         }
         if (adjunto3Nombre != null && !adjunto3Nombre.isEmpty()) {
             creaBitacoraElem.addChildElement("Adjunto03_attachmentName", "urn").addTextNode(adjunto3Nombre);
-            creaBitacoraElem.addChildElement("Adjunto03_attachmentData", "urn").addTextNode(adjunto3Data);
+            creaBitacoraElem.addChildElement("Adjunto03_attachmentData", "urn").addTextNode(getBase64EncodedStringFromFile(adjunto3Data));
         }
 
         return soapMessage;
@@ -107,5 +107,15 @@ public class ConsumeRemedyWSDLNotasWO {
         } catch (SOAPException | IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    private static String getBase64EncodedStringFromFile(String filePath) throws IOException {
+        File file = new File(filePath);
+        FileInputStream inputStream = new FileInputStream(file);
+        byte[] bytes = new byte[(int) file.length()];
+        inputStream.read(bytes);
+        inputStream.close();
+        return java.util.Base64.getEncoder().encodeToString(bytes);
     }
 }

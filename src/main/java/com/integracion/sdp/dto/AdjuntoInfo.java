@@ -1,4 +1,4 @@
-package com.integracion.sdp.model;
+package com.integracion.sdp.dto;
 
 public class AdjuntoInfo {
     private String nombre;

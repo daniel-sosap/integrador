@@ -38,10 +38,8 @@ public class sdpApplication {
 	public static void main(String[] args) throws SOAPException {
 		SpringApplication.run(sdpApplication.class, args);
 
-		System.out.println("version 090324_2000");
-		ConsumeSDP consumeSDP = new ConsumeSDP();
-		//consumeSDP.addNoteRequest("21","Nota desde intellij 2 marzo 2_38");
-
+		System.out.println("version 140324_1200");
+		//ConsumeSDP consumeSDP = new ConsumeSDP();
 
 		String env = configManager.getProperty("config.ambiente");
 		System.out.println("Ambiente detectado: " + env);

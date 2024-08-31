@@ -87,14 +87,14 @@ public class JSONRequestIncidente {
         if (incidentUpdate.getMotivoActualizacion() == null || incidentUpdate.getMotivoActualizacion().trim().isEmpty()) {
             System.out.println("MotivoActualizacion es vacio");
         } else {
-            udfFieldsObject.put("udf_pick_601", incidentUpdate.getMotivoActualizacion());
+            udfFieldsObject.put(configManager.getProperty("config.inc.field.motivo_actualizacion"), incidentUpdate.getMotivoActualizacion());
             System.out.println("MotivoActualizacion NO es vacio");
         }
 
 
             // Si no se recibió status, generar JSON correspondiente con los campos recibidos
             if (incidentUpdate.getImpacto() == null || incidentUpdate.getImpacto().trim().isEmpty()) {
-                System.out.println("Impactpo es vacio");
+                System.out.println("Impacto es vacio");
             }else {
                 JSONObject impactObject = new JSONObject();
                 impactObject.put("name", incidentUpdate.getImpacto());
@@ -122,21 +122,21 @@ public class JSONRequestIncidente {
             if (incidentUpdate.getRfcCortoCliente() == null || incidentUpdate.getRfcCortoCliente().trim().isEmpty()) {
                 System.out.println("RfcCortoCliente es vacio");
             }else {
-                udfFieldsObject.put("udf_sline_305", incidentUpdate.getRfcCortoCliente());
+                udfFieldsObject.put(configManager.getProperty("config.inc.field.rfc_cliente"), incidentUpdate.getRfcCortoCliente());
                 System.out.println("RfcCortoCliente NO es vacio");
             }
 
             if (incidentUpdate.getRfcCortoContacto() == null || incidentUpdate.getRfcCortoContacto().trim().isEmpty()) {
                 System.out.println("RfcContacto  es vacio");
             }else {
-                udfFieldsObject.put("udf_sline_306", incidentUpdate.getRfcCortoContacto());
+                udfFieldsObject.put(configManager.getProperty("config.inc.field.rfc_contacto"), incidentUpdate.getRfcCortoContacto());
                 System.out.println("RfcContacto NO es vacio");
             }
 
             if (incidentUpdate.getDireccion() == null || incidentUpdate.getDireccion().trim().isEmpty()) {
                 System.out.println("Direccion  es vacio");
             }else {
-                udfFieldsObject.put("udf_sline_307", incidentUpdate.getDireccion());
+                udfFieldsObject.put(configManager.getProperty("config.inc.field.direccion"), incidentUpdate.getDireccion());
                 System.out.println("Direccion NO es vacio");
             }
 
@@ -148,7 +148,6 @@ public class JSONRequestIncidente {
         }
 
 
-        // Añadir el objeto requester (nombre fijo "Temp User" según tus especificaciones)
 
 
         // Añadir el objeto request al JSON principal

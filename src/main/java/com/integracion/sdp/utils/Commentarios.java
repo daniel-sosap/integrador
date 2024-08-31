@@ -27,10 +27,13 @@ public class Commentarios {
 
     static final String urlServicedesk = "http://" + configManager.getProperty("config.servicedesk.hostname") + ":" + configManager.getProperty("config.servicedesk.puerto");
 
-    @Scheduled(fixedRate = 60000) // Se ejecutará cada minuto (60000 ms)
+    @Scheduled(fixedRate = 25000) // Se ejecutará cada minuto (60000 ms)
     public void ejecutarActualizacionDeNotas() {
         try {
-            actualizaNotasWO();
+            if(configManager.getProperty("config.wo.mode").toString().equals("on")) {
+                System.out.println("Envio de notas activo");
+                actualizaNotasWO();
+            }
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -41,7 +44,6 @@ public class Commentarios {
                 .header("Authtoken", configManager.getProperty("config.token"))
                 .asString();
 
-        // Supongamos que `jsonResponse` contiene la respuesta JSON que proporcionaste
         String jsonResponse = responseTasks.getBody();
         System.out.println("jsonResponse" + jsonResponse);
         // Convertir la respuesta JSON a un árbol JSON

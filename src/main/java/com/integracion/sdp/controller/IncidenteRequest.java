@@ -5,7 +5,6 @@ public class IncidenteRequest {
     private int numeroIncidente;
     private String estado;
 
-    // Agrega getters y setters según sea necesario
 
     public int getNumeroIncidente() {
         return numeroIncidente;

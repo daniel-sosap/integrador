@@ -1,9 +1,8 @@
 package com.integracion.sdp.utils;
 
-import com.integracion.sdp.gen.IncidentUpdate;
 import com.integracion.sdp.gen.WorklogIncidentRequest;
 import com.integracion.sdp.gen.WorklogResponse;
-import com.integracion.sdp.model.AdjuntoInfo;
+import com.integracion.sdp.dto.AdjuntoInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -28,38 +27,7 @@ public class WSDLWorklogIncidentRequest {
                 "\ntoken: " + incidentWorklog.getWorklog().getToken());
     }
 
-/*
-    public List<AdjuntoInfo> validaAdjuntos(WorklogIncidentRequest request) {
-        List<AdjuntoInfo> adjuntosGuardados = new ArrayList<>();
 
-        // Variables para contar los adjuntos y construir las rutas de los archivos
-        int contadorAdjuntos = 0;
-
-        // Guardar los archivos adjuntos en la carpeta temporal
-        for (int i = 1; i <= 3; i++) {
-            String nombreAdjunto = request.getWorklog().getAdjuntoNombre(i);
-            byte[] adjuntoData = request.getWorklog().getAdjuntoData(i);
-            if (adjuntoData != null && nombreAdjunto != null) {
-                try {
-                    String rutaArchivo = System.getProperty("java.io.tmpdir") + File.separator + nombreAdjunto;
-                    FileOutputStream fos = new FileOutputStream(rutaArchivo);
-                    fos.write(adjuntoData);
-                    fos.close();
-                    adjuntosGuardados.add(new AdjuntoInfo(nombreAdjunto, rutaArchivo));
-                    contadorAdjuntos++;
-                    System.out.println("Archivo " + i + " guardado en la carpeta temporal: " + rutaArchivo);
-                } catch (IOException e) {
-                    System.err.println("Error al guardar el archivo " + i + " en la carpeta temporal: " + e.getMessage());
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        System.out.println("Total de archivos adjuntos guardados: " + contadorAdjuntos);
-
-        return adjuntosGuardados;
-    }
-*/
 public List<AdjuntoInfo> validaAdjuntos(WorklogIncidentRequest request) {
         List<AdjuntoInfo> adjuntosGuardados = new ArrayList<>();
         int contadorAdjuntos = 0;

@@ -2,7 +2,7 @@ package com.integracion.sdp.client;
 
 import com.integracion.sdp.config.ConfigurationManager;
 import com.integracion.sdp.gen.*;
-import com.integracion.sdp.model.AdjuntoInfo;
+import com.integracion.sdp.dto.AdjuntoInfo;
 import com.integracion.sdp.utils.JSONRequestIncidente;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
@@ -11,7 +11,6 @@ import kong.unirest.UnirestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.json.JSONObject;
 
 import java.io.File;
 
@@ -38,7 +37,7 @@ final String urlServicedesk = "http://"+configManager.getProperty("config.servic
                 .field("input_data", input_data)
                 .asString();
 
-        System.out.println("Consumo de servicio Service desk plus");
+        System.out.println("Consumo de servicio Service desk plus /api/v3/requests");
         IncidentResponse incidentResponse = new IncidentResponse();
 
         if (response.getStatus() == 201) {
@@ -66,7 +65,7 @@ final String urlServicedesk = "http://"+configManager.getProperty("config.servic
                 .field("input_data", input_data)
                 .asString();
 
-        System.out.println("Consumo de servicio update de ticket");
+        System.out.println("Consumo de servicio update de ticket put api/v3/requests/");
         StatusResponse statusResponse = new StatusResponse();
 
         if (response.getStatus() == 201) {
@@ -103,9 +102,6 @@ final String urlServicedesk = "http://"+configManager.getProperty("config.servic
                 .field("input_data", input_data)
                 .asString();
 
-        System.out.println("Consumo de servicio addNoteRequest desde intellij");
-       // JSONObject responseObject = new JSONObject(response);
-      //  String responseStatus = responseObject.getJSONObject("response_status").getString("status");
         System.out.println("Respuesta del servicio success or failed: " +  response.getStatus());
 
         if (response.getStatus() == 201) {
@@ -134,29 +130,23 @@ final String urlServicedesk = "http://"+configManager.getProperty("config.servic
 
         System.out.println("La URL  de service desk plus es " + urlServicedesk);
 
-        // Ruta del archivo adjunto a subir
         String filePath = adjunto.getRuta();
 
         try {
-            // Realizar la solicitud PUT utilizando Unirest
             HttpResponse<String> response = Unirest.put(url)
                     .header("Accept", "application/vnd.manageengine.sdp.v3+json")
                     .header("Authtoken",  configManager.getProperty("config.token"))
                     .field("file", new File(filePath))
                     .asString();
 
-            // Manejar la respuesta de la solicitud
             if (response.getStatus() == 200) {
-                // Si la solicitud fue exitosa, imprimir el cuerpo de la respuesta
                 System.out.println("Respuesta de la solicitud: " + response.getBody());
                 return true;
             } else {
-                // Si hubo un error, imprimir el mensaje de error de la respuesta
                 System.out.println("Error en la respuesta de la solicitud: " + response.getBody());
                 return false;
             }
         } catch (UnirestException e) {
-            // Capturar y manejar cualquier excepción que pueda ocurrir durante la solicitud
             System.err.println("Error al realizar la solicitud: " + e.getMessage());
             return false;
         }
